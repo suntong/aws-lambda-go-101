@@ -52,7 +52,16 @@ provider:
 #    variable1: value1
 
   environment:
-    bucket_name: test-bucket--aseem
+    bucket_name: test-bucket--glt
+
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - s3:*
+      Resource: "arn:aws:s3:::${self:custom.s3Bucket}/*"
+
+custom:
+  s3Bucket: test-bucket--glt
 
 package:
   patterns:
@@ -85,6 +94,7 @@ functions:
           path: /uploadImage
           method: post
     memorySize: 128
+
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
 #    Check the event documentation for details
