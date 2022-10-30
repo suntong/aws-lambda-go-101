@@ -51,6 +51,9 @@ provider:
 #  environment:
 #    variable1: value1
 
+  environment:
+    bucket_name: test-bucket--aseem
+
 package:
   patterns:
     - '!./**'
@@ -69,6 +72,13 @@ functions:
       - httpApi:
           path: /world
           method: get
+  upload:
+    handler: bin/upload
+    events:
+      - httpApi:
+          path: /uploadImage
+          method: post
+    memorySize: 128
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
 #    Check the event documentation for details
