@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/base64"
 	"encoding/json"
+	"log"
 
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
@@ -17,11 +18,13 @@ func Handler(request events.APIGatewayProxyRequest) (ResponseToSend, error) {
 	err := json.Unmarshal([]byte(request.Body), &bodyRequest)
 
 	if err != nil {
+		log.Printf("Failed json.Unmarshal: %v\n", err.Error())
 		return ResponseToSend{Body: err.Error(), StatusCode: 404}, nil
 	}
 
 	decoded, err := base64.StdEncoding.DecodeString(bodyRequest.Body)
 	if err != nil {
+		log.Printf("Failed base64.Decode: %v\n", err.Error())
 		return ResponseToSend{Body: err.Error(), StatusCode: 404}, nil
 	}
 
@@ -29,6 +32,7 @@ func Handler(request events.APIGatewayProxyRequest) (ResponseToSend, error) {
 
 	response, err := json.Marshal(&resp)
 	if err != nil {
+		log.Printf("Failed json.Marshal: %v\n", err.Error())
 		return ResponseToSend{Body: err.Error(), StatusCode: 404}, nil
 	}
 
