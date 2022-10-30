@@ -72,6 +72,12 @@ functions:
       - httpApi:
           path: /world
           method: get
+  eval:
+    handler: bin/eval
+    events:
+      - httpApi:
+          path: /eval
+          method: get
   upload:
     handler: bin/upload
     events:
