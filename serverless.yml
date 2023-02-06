@@ -52,7 +52,7 @@ provider:
 #    variable1: value1
 
   environment:
-    bucket_name: test-bucket-2023-02-06
+    bucket_name: ${self:custom.s3Bucket}
 
   iamRoleStatements:
     - Effect: Allow
@@ -142,7 +142,7 @@ resources:
     NewResource:
       Type: AWS::S3::Bucket
       Properties:
-        BucketName: test-bucket-2023-02-06
+        BucketName: ${self:custom.s3Bucket}
 #  Outputs:
 #     NewOutput:
 #       Description: "Description for the output"
