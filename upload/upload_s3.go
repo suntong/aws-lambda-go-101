@@ -13,7 +13,7 @@ import (
 func uploadToS3Bucket(file io.Reader, fileName string) ImageUploadResponse {
 
 	bucketName := os.Getenv("bucket_name")
-	region := "us-east-2"
+	region := "us-east-1"
 
 	//select Region to use.
 	conf := aws.Config{Region: &region}

@@ -52,7 +52,7 @@ provider:
 #    variable1: value1
 
   environment:
-    bucket_name: test-bucket--glt
+    bucket_name: test-bucket-2023-02-06
 
   iamRoleStatements:
     - Effect: Allow
@@ -61,7 +61,7 @@ provider:
       Resource: "arn:aws:s3:::${self:custom.s3Bucket}/*"
 
 custom:
-  s3Bucket: test-bucket--glt
+  s3Bucket: test-bucket-2023-02-06
 
 package:
   patterns:
@@ -137,12 +137,12 @@ functions:
 #      variable2: value2
 
 # you can add CloudFormation resource templates here
-#resources:
-#  Resources:
-#    NewResource:
-#      Type: AWS::S3::Bucket
-#      Properties:
-#        BucketName: my-new-bucket
+resources:
+  Resources:
+    NewResource:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: test-bucket-2023-02-06
 #  Outputs:
 #     NewOutput:
 #       Description: "Description for the output"
