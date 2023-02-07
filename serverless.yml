@@ -23,6 +23,11 @@ service: aws-go
 provider:
   name: aws
   runtime: go1.x
+  stackTags: # will cascade down to all resources created in the stack
+    on: "web demo"
+    for: web
+    use: gw-api
+    lang: go
 
 # you can overwrite defaults here
 #  stage: dev
