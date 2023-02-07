@@ -51,18 +51,6 @@ provider:
 #  environment:
 #    variable1: value1
 
-  environment:
-    bucket_name: ${self:custom.s3Bucket}
-
-  iamRoleStatements:
-    - Effect: Allow
-      Action:
-        - s3:*
-      Resource: "arn:aws:s3:::${self:custom.s3Bucket}/*"
-
-custom:
-  s3Bucket: test-bucket-2023-02-06
-
 package:
   patterns:
     - '!./**'
@@ -87,13 +75,6 @@ functions:
       - httpApi:
           path: /eval
           method: get
-  upload:
-    handler: bin/upload
-    events:
-      - httpApi:
-          path: /uploadImage
-          method: post
-    memorySize: 128
 
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
@@ -137,12 +118,12 @@ functions:
 #      variable2: value2
 
 # you can add CloudFormation resource templates here
-resources:
-  Resources:
-    NewResource:
-      Type: AWS::S3::Bucket
-      Properties:
-        BucketName: ${self:custom.s3Bucket}
+#resources:
+#  Resources:
+#    NewResource:
+#      Type: AWS::S3::Bucket
+#      Properties:
+#        BucketName: ${self:custom.s3Bucket}
 #  Outputs:
 #     NewOutput:
 #       Description: "Description for the output"
