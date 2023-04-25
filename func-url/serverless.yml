@@ -1,0 +1,38 @@
+# This file is the main config file for your service.
+
+service: func-url-go-demo
+
+provider:
+  name: aws
+  timeout: 25
+  runtime: go1.x
+  stackTags: # will cascade down to all resources created in the stack
+    on: "web demo"
+    for: web
+    use: funcurl
+    lang: go
+  iam:
+    role:
+      statements:
+        - Effect: "Allow"
+          Resource: "*"
+          Action:
+            - "xray:*"
+
+# you can overwrite defaults here
+#  stage: dev
+#  region: us-east-1
+
+# you can define service wide environment variables here
+#  environment:
+#    variable1: value1
+
+package:
+  patterns:
+    - '!./**'
+    - ../bin/func-url
+
+functions:
+  theentry:
+    handler: bin/func-url
+    url: true # createfunction URL which is public without CORS configuration
