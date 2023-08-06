@@ -41,7 +41,7 @@ func handleRequest(ctx context.Context, event events.SQSEvent) (string, error) {
 	deadline, _ := ctx.Deadline()
 	log.Printf("DEADLINE: %s", deadline)
 	// AWS SDK call
-	usage, err := callLambda()
+	usage, err := "", error(nil) //callLambda()
 	if err != nil {
 		return "ERROR", err
 	}
